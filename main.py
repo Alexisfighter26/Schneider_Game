@@ -1,6 +1,6 @@
 import pygame
 import random
-import utils
+'''import utils'''
 
 # import time
 # import sys
@@ -49,7 +49,7 @@ W, H = 800, 447
 win = pygame.display.set_mode((W, H))
 pygame.display.set_caption('Side Scroller')
 
-bg = pygame.image.load(os.path.join('assets/sprites/sus.png')).convert()
+bg = pygame.image.load(('assets/sprites/sus.png')).convert()
 bgX = 0
 bgX2 = bg.get_width()
 
@@ -57,16 +57,23 @@ clock = pygame.time.Clock()
 
 # (=====================Character Class======================)
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, velocity_x, velocity_y):
-        super().__init__()
-        self.position = (x, y)
-        self.velocity = (velocity_x, velocity_y)
+    def __init__(self, screen):
+        # Attributes of player
+        plyr = f'assets/sprites/sus.png'
+        self.player_img = pygame.image.load(plyr).convert()
+        self.player_rect = self.player_img.get_rect()
 
-    def update(self):
-        self.position = (self.position[0] + self.velocity[0], self.position[1] + self.velocity[1])
+        self.player_x = random.randint(0, screen.get_width() - self.player_img.get_width())
+        self.player_x_dir = 1
+        self.player_x_spd = screen.get_width() / (2 * 60)
 
-    def draw(self, surface):
-        pygame.draw.circle(surface, (255, 0, 0), self.position, 10)
+        self.y_bnd = screen.get_height()
+        self.player_y = random.randint(0, self.y_bnd)
+        self.player_y_dir = 1
+        self.player_y_spd = self.y_bnd / (2 * 60)
+
+
+
 
 
 # (=================================================)
