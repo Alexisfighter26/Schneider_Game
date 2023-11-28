@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         elif keys[pygame.K_RIGHT]:
             self.rect.x += 5
 
-        # Apply horizontal velocity
+        # Apply horizontal velocity (adds the x position with the x velocity "positioning")
         self.rect.x += self.vel_x
 
         # Prevent the player from going off the screen horizontally
