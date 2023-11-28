@@ -5,6 +5,7 @@ import sys
 
 # Initialize Pygame
 pygame.init()
+
 # Create Pygame clock
 clock = pygame.time.Clock()
 
@@ -21,14 +22,14 @@ print('Running game...')
 running = True
 while running:
     # store pygame events in a variable
-    events = pygame.event.get()
+    # events = pygame.event.get()
     # Get events happening in window.
-    for event in events:
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
     # Update Player Position
-    player.update_plyr_position
+    player.update_plyr_position()
 
     # Draw background.
     screen.blit(background, (0, 0))
@@ -39,12 +40,14 @@ while running:
     player.draw_plyr(screen)
 
     # Flip screen so user can see it
-
     pygame.display.flip()
 
     #Slow loop to 60 frames per second
     clock.tick(60)
 
+# Quit pygame
+pygame.quit()
+sys.exit()
 
 '''# Main game loop
 while True:
