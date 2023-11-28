@@ -1,5 +1,6 @@
 from Player import *
 import sys
+from pygame import mixer
 
 
 # Initialize Pygame
@@ -13,6 +14,11 @@ screen = pygame.display.set_mode((1200, 486))
 
 # Background
 background = pygame.image.load("assets/sprites/Min_background.png")
+
+# Background Sound!
+mixer.init()
+mixer.music.load("assets/sound/backgroundmusic.ogg")
+mixer.music.play()
 
 # Creating Instance of Player
 player = Player()
