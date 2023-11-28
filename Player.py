@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = 0  # Vertical velocity
         self.jump_power = -10  # Initial force applied when jumping
         self.gravity = 0.6  # Gravity to bring the player back down
-        self.max_speed = 5  # Maximum horizontal movement speed
+        self.max_speed = 10  # Maximum horizontal movement speed (bc im only moving in x dir)
 
     # This function updates my player position
     def update_plyr_position(self, screen_width, screen_height):
@@ -30,9 +30,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= 5
         elif keys[pygame.K_RIGHT]:
             self.rect.x += 5
-
-        # Apply horizontal velocity (adds the x position with the x velocity "positioning")
-        self.rect.x += self.vel_x
 
         # Prevent the player from going off the screen horizontally
         if self.rect.left < 0:
