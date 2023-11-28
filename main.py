@@ -1,6 +1,7 @@
-from Player import *
 import sys
 from pygame import mixer
+from Player import Player
+import pygame
 
 
 # Initialize Pygame
@@ -11,6 +12,10 @@ clock = pygame.time.Clock()
 
 # Create the screen
 screen = pygame.display.set_mode((1200, 486))
+
+# Defining screen dimensions (easier to set bounds for character)
+screen_width = 1200
+screen_height = 486
 
 # Background
 background = pygame.image.load("assets/sprites/Min_background.png")
@@ -23,23 +28,21 @@ mixer.music.play()
 # Creating Instance of Player
 player = Player()
 
+# Main Game loop
 print('Running game...')
 running = True
 while running:
     # store pygame events in a variable
-    # events = pygame.event.get()
-    # Get events happening in window.
+    # Get events happening in window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Update Player Position
-    player.update_plyr_position()
+    # Update Player Position (Two arguments are passed, screen_width and screen_height)
+    player.update_plyr_position(screen_width, screen_height)
 
-    # Draw background.
+    # Draw background
     screen.blit(background, (0, 0))
-    pygame.display.flip()
-    clock.tick(60)
 
     # Drawing player
     player.draw_plyr(screen)
