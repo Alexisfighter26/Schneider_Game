@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey((251, 251, 251))  # Set color key as a tuple
         self.vel_x = 0  # Horizontal velocity
         self.vel_y = 0  # Vertical velocity
-        self.jump_power = -10  # Initial force applied when jumping
+        self.jump_power = -10  # Force applied when jumping
         self.gravity = 0.6  # Gravity to bring the player back down
         self.max_speed = 10  # Maximum horizontal movement speed (bc im only moving in x dir)
 

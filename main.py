@@ -2,6 +2,7 @@ import sys
 from pygame import mixer
 from Player import Player
 from Enemies import Enemy
+from Background import Platform
 import pygame
 
 
@@ -19,7 +20,9 @@ screen_width = 1200
 screen_height = 486
 
 # Background
-background = pygame.image.load("assets/sprites/Min_background.png")
+background = pygame.image.load("assets/sprites/set1_background.png").convert()
+
+
 
 # Background Sound!
 mixer.init()
@@ -36,6 +39,14 @@ enemy1 = Enemy()
 # Creating an instance of Enemy and adding it to the enemy_group
 enemy_group.add(enemy1)
 
+# Create Instance of Platforms
+platform1 = Platform(100, 400, 200, 20)  # Example platform 1
+platform2 = Platform(400, 300, 150, 20)  # Example platform 2
+
+# Grouping Platforms
+platform_group = pygame.sprite.Group()
+platform_group.add(platform1)
+platform_group.add(platform2)
 
 # Main Game loop
 print('Running game...')
@@ -47,6 +58,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+
     # Update Player Position (Two arguments are passed, screen_width and screen_height)
     player.update_plyr_position(screen_width, screen_height)
 
@@ -55,6 +67,9 @@ while running:
 
     # Draw background
     screen.blit(background, (0, 0))
+
+    # Draw Platforms
+    platform_group.draw(screen)
 
     # Drawing player
     player.draw_plyr(screen)
