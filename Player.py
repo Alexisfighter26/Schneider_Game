@@ -1,5 +1,4 @@
 import pygame
-from utils import *
 
 class Player:
     def __init__(self, x, y):
@@ -10,7 +9,7 @@ class Player:
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        self.rect.center(x,y)
+        self.get_rect()
 
 
         # Setting Speed

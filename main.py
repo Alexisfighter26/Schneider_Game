@@ -1,59 +1,66 @@
 import pygame
-import random
-from Player import Player
-from utils import *
 import time
-from Background import *
+from Player import *
+import sys
 
 # Initialize Pygame
 pygame.init()
-
 # Create Pygame clock
 clock = pygame.time.Clock()
 
 # Create the screen
 screen = pygame.display.set_mode((1200, 486))
 
+# Background
+background = pygame.image.load("assets/sprites/Min_background.png")
 
-# Main Game loop
+# Creating Instance of Player
+player = Player()
 
-pygame.init
-
+print('Running game...')
 running = True
 while running:
+    # store pygame events in a variable
+    events = pygame.event.get()
+    # Get events happening in window.
+    for event in events:
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Update Player Position
+    player.update_plyr_position
+
+    # Draw background.
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+    clock.tick(60)
+
+    # Drawing player
+    player.draw_plyr(screen)
+
+    # Flip screen so user can see it
+
+    pygame.display.flip()
+
+    #Slow loop to 60 frames per second
+    clock.tick(60)
+
+
+'''# Main game loop
+while True:
+    # Handle events
     for event in pygame.event.get():
-        if event.type == pygame.quit:
-            running = false
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-# (=====================Character Class======================)
-
-# Copy image to screen
-
-# Update character position
-
-
-
-    # Update the player sprite
-    player.update()
-
-    # Clear the window
-    window.fill((255, 255, 255))
-
-    # Draw the player sprite
-    player.draw(window)
-
-    # Update the display
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                player.move_left()
+            elif event.key == pygame.K_RIGHT:
+                player.move_right()
 
 
-
-
-# (=================================================)
-
-# Show screen to user
-run = True
-while run:
-    for event in pygame.event.get():  # Loop through a list of events
-        if event.type == pygame.QUIT:  # See if the user clicks the red x
-            run = False    # End the loop
-            pygame.quit()  # Quit the game
-            quit()
+    position = Player.get_rect()
+    screen.blit(player, position)
+    pygame.display.update()'''
