@@ -1,7 +1,6 @@
-import pygame
-import time
 from Player import *
 import sys
+
 
 # Initialize Pygame
 pygame.init()
@@ -42,28 +41,9 @@ while running:
     # Flip screen so user can see it
     pygame.display.flip()
 
-    #Slow loop to 60 frames per second
+    # Slow loop to 60 frames per second
     clock.tick(60)
 
 # Quit pygame
 pygame.quit()
 sys.exit()
-
-'''# Main game loop
-while True:
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                player.move_left()
-            elif event.key == pygame.K_RIGHT:
-                player.move_right()
-
-
-    position = Player.get_rect()
-    screen.blit(player, position)
-    pygame.display.update()'''
