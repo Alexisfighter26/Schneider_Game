@@ -34,8 +34,10 @@ class Player(pygame.sprite.Sprite):
         # Prevent the player from going off the screen horizontally
         if self.rect.left < 0:
             self.rect.left = 0
-        elif self.rect.right > screen_width:
-            self.rect.right = screen_width
+
+        # If I wanted to limit my character to not go off the screen the right side
+        # elif self.rect.right > screen_width:
+            #self.rect.right = screen_width
 
         # Jumping mechanism
         if keys[pygame.K_SPACE] and self.rect.bottom >= screen_height:
