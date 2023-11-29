@@ -32,7 +32,7 @@ mixer.music.play()
 # Creating Instance of Player
 player = Player()
 
-# Create gruop Instance of Enemy
+# Create group Instance of Enemy
 enemy_group = pygame.sprite.Group()
 # The instance of enemies
 enemy1 = Enemy()
