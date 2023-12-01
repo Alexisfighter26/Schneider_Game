@@ -6,8 +6,6 @@ from Enemies import Enemy
 from Background import Platform
 import math
 
-
-
 # Initialize Pygame
 pygame.init()
 
@@ -19,7 +17,8 @@ FPS = 100
 screen_width = 1200
 screen_height = 486
 
-# Create the screen
+# =========================================== Create the screen =========================================== #
+
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 # Background
@@ -27,25 +26,7 @@ background = pygame.image.load("assets/sprites/scrolling.jpg").convert()
 background_width = background.get_width()
 background_rect = background.get_rect()
 
-#define game variables
-scroll = 0
-tiles = math.ceil(screen_width  / background_width) + 1
-
-# Background Sound!
-mixer.init()
-mixer.music.load("assets/sound/backgroundmusic.ogg")
-mixer.music.play()
-
-# Creating Instance of Player
-player = Player()
-
-# Create group Instance of Enemy
-enemy_group = pygame.sprite.Group()
-# The instance of enemies
-enemy1 = Enemy()
-# Creating an instance of Enemy and adding it to the enemy_group
-enemy_group.add(enemy1)
-
+# ========================= Creating the obstructions / platforms ================== #
 
 platform_group = pygame.sprite.Group()
 
@@ -57,6 +38,31 @@ platform3 = Platform(500, 300)
 # Add platforms to the platform group
 platform_group.add(platform1, platform2, platform3)
 
+# define scrolling variable (will prob delete)
+scroll = 0
+tiles = math.ceil(screen_width  / background_width) + 1
+
+# Background Sound!
+mixer.init()
+mixer.music.load("assets/sound/backgroundmusic.ogg")
+mixer.music.play()
+
+# ================ Creating  Entities ===================== #
+
+# Instance of Player
+player = Player()
+
+# Create group Instance of Enemy
+enemy_group = pygame.sprite.Group()
+
+# The instance of enemies
+enemy1 = Enemy()
+
+# Creating an instance of Enemy and adding it to the enemy_group
+enemy_group.add(enemy1)
+
+# ===== END OF CREATION ====== #
+
 # Main Game loop
 print('Running game...')
 running = True
@@ -67,7 +73,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # === Scrolling Screen ===============================================
+    # === Scrolling Screen =============================================== #
 
         clock.tick(FPS)
 
@@ -89,17 +95,7 @@ while running:
             if event.type == pygame.QUIT:
                 run = False
 
-    # ====== Entities Update =============================================
-
-    # Update Player Position (Two arguments are passed, screen_width and screen_height)
-    player.update_plyr_position(screen_width, screen_height, platform_group)
-
-    # Update Enemy
-    enemy_group.update()
-
-    # ====== Draw Background =============
-
-    #screen.fill((0, 0, 0))
+    # ====== Draw Background ============= #
 
     # Draw background (scrolling)
     for i in range(tiles):
@@ -108,7 +104,7 @@ while running:
     # Draw Platforms
     platform_group.draw(screen)
 
-    # ====== Draw Entities =============
+    # ====== Draw Entities ============= #
 
     # Drawing player
     player.draw_plyr(screen)
@@ -116,8 +112,15 @@ while running:
     # Drawing enemies
     enemy_group.draw(screen)
 
-    # ====== User Interface  =============
+    # ====== Entities Update ============================================= #
 
+    # Update Player Position (Two arguments are passed, screen_width and screen_height)
+    player.update_plyr_position(screen_width, screen_height, platform_group)
+
+    # Update Enemy
+    enemy_group.update()
+
+    # ====== DONE ============= #
     # Flip screen so user can see it
     pygame.display.flip()
 

@@ -2,6 +2,7 @@ import pygame
 
 platform_width = 64
 platform_height = 64
+
 class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
