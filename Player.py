@@ -17,12 +17,12 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey((251, 251, 251))  # Set color key as a tuple
         self.vel_x = 0  # Horizontal velocity
         self.vel_y = 0  # Vertical velocity
-        self.jump_power = -10  # Force applied when jumping
+        self.jump_power = -15  # Force applied when jumping
         self.gravity = 0.6  # Gravity to bring the player back down
         self.max_speed = 10  # Maximum horizontal movement speed (bc im only moving in x dir)
 
     # This function updates my player position
-    def update_plyr_position(self, screen_width, screen_height):
+    def update_plyr_position(self, screen_width, screen_height, platform_group):
         keys = pygame.key.get_pressed()
 
         # Horizontal movement
@@ -35,9 +35,8 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
-        # If I wanted to limit my character to not go off the screen the right side
-        # elif self.rect.right > screen_width:
-            #self.rect.right = screen_width
+        elif self.rect.right > screen_width:
+            self.rect.right = screen_width
 
         # Jumping mechanism
         if keys[pygame.K_SPACE] and self.rect.bottom >= screen_height:
@@ -53,6 +52,26 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom >= screen_height:
             self.rect.bottom = screen_height
             self.vel_y = 0
+
+        # Check for collision with platforms
+        collisions = pygame.sprite.spritecollide(self, platform_group, False)
+        for platform in collisions:
+            if self.vel_y > 0:
+                self.rect.bottom = platform.rect.top
+                self.vel_y = 0
+            elif self.vel_y < 0:
+                self.rect.top = platform.rect.bottom
+                self.vel_y = 0
+
+            # Jumping mechanism (can jump anytime the player is in contact with a platform)
+            if keys[pygame.K_SPACE] and (collisions or self.rect.bottom >= screen_height):
+                self.vel_y = self.jump_power
+
+            # Prevent the player from going off the screen vertically
+            if self.rect.bottom >= screen_height:
+                self.rect.bottom = screen_height
+                self.vel_y = 0
+
 
     # Drawing player on screen
     def draw_plyr(self, screen):

@@ -1,9 +1,9 @@
 import sys
+import pygame
 from pygame import mixer
 from Player import Player
 from Enemies import Enemy
 from Background import Platform
-import pygame
 import math
 
 
@@ -46,14 +46,16 @@ enemy1 = Enemy()
 # Creating an instance of Enemy and adding it to the enemy_group
 enemy_group.add(enemy1)
 
-# Create Instance of Platforms
-platform1 = Platform(100, 400, 200, 20)  # Example platform 1
-platform2 = Platform(400, 300, 150, 20)  # Example platform 2
 
-# Grouping Platforms
 platform_group = pygame.sprite.Group()
-platform_group.add(platform1)
-platform_group.add(platform2)
+
+# Create Instance of Platforms
+platform1 = Platform(300, 500)
+platform2 = Platform(100, 400)
+platform3 = Platform(500, 300)
+
+# Add platforms to the platform group
+platform_group.add(platform1, platform2, platform3)
 
 # Main Game loop
 print('Running game...')
@@ -90,16 +92,16 @@ while running:
     # ====== Entities Update =============================================
 
     # Update Player Position (Two arguments are passed, screen_width and screen_height)
-    player.update_plyr_position(screen_width, screen_height)
+    player.update_plyr_position(screen_width, screen_height, platform_group)
 
     # Update Enemy
     enemy_group.update()
 
     # ====== Draw Background =============
 
-    screen.fill((0,0,0))
+    #screen.fill((0, 0, 0))
 
-    # Draw background
+    # Draw background (scrolling)
     for i in range(tiles):
         screen.blit(background, (i * background_width + scroll, 0))
 
