@@ -30,9 +30,9 @@ def create_platforms(platform_group):
 
     # Create Instance of Platforms
     platform1 = Platform(1136, 64)
-    platform2 = Platform(0, 294)
-    platform3 = Platform(320, 150)
-    platform4 = Platform(128, 522)
+    platform2 = Platform(600, 278)
+    platform3 = Platform(664, 278)
+    platform4 = Platform(536, 278)
     platform5 = Platform(192, 522)
     platform6 = Platform(256, 522)
     platform7 = Platform(320, 522)

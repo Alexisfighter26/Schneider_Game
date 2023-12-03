@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Load the player image
-        self.image = pygame.image.load('assets/sprites/sus.png').convert()
+        self.image = pygame.image.load('assets/sprites/sus.png').convert_alpha()
         self.rect = self.image.get_rect(center=(25, 422))  # Set the initial position of the player
 
         # Initialize the player's vertical velocity, jump power, gravity, and ground flag

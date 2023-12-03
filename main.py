@@ -116,6 +116,7 @@ while running:
     #enemy_group.update()
     for enemy in enemy_group:
         enemy.update(player)
+ 
     # =================== Interactions between Jewels and player ============================ #
 
     jewels_collected = pygame.sprite.spritecollide(player, jewel_group, True)

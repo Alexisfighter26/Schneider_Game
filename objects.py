@@ -8,7 +8,7 @@ class Jewel(pygame.sprite.Sprite):
         super().__init__()
 
         # Same thing as player, initialize image, position and physics
-        self.image = pygame.image.load('assets/sprites/yellowGem.png').convert()
+        self.image = pygame.image.load('assets/sprites/yellowGem.png').convert_alpha()
         # creates an object around my character (easily able to manipulate collisions, and positioning)
         self.rect = self.image.get_rect()
         self.set_random_position(screen_width, screen_height)

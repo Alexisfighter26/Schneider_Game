@@ -8,7 +8,7 @@ screen_height = 428
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('assets/sprites/alienBlue.png').convert()
+        self.image = pygame.image.load('assets/sprites/alienBlue.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.speed = 2  # Adjust this value to control the enemy's speed
 
