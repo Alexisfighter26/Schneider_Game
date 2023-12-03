@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
 
         # Initialize the player's vertical velocity, jump power, gravity, and ground flag
         self.vel_y = 0
-        self.jump_power = -15
+        self.jump_power = -14
         self.gravity = 0.6
         self.on_ground = False  # Flag to track whether the player is on the ground
 
