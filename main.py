@@ -3,15 +3,12 @@ import pygame
 from pygame import mixer
 from Player import Player
 from Enemies import Enemy
-import math
 from Background import create_platforms
-from Intro import *
-
+from loading_screens import *
+import math
 
 # Initialize Pygame
 pygame.init()
-
-
 
 # Create Pygame clock
 clock = pygame.time.Clock()
@@ -38,7 +35,7 @@ hills2 = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 platform_group = pygame.sprite.Group()
 create_platforms(platform_group)
 
-# Background Sound!
+# -------------------- Background Sound --------------------------------#
 mixer.init()
 mixer.music.load("assets/sound/backgroundmusic.ogg")
 mixer.music.play()
@@ -83,6 +80,7 @@ while running:
 
     # Drawing player
     player.draw_plyr(screen)
+    player.draw_health(screen)
 
     # Drawing enemies
     enemy_group.draw(screen)
@@ -105,7 +103,13 @@ while running:
         # You can add more logic here, such as enemy bounce-back or removing the enemy
         # For example, if enemy has a knockback effect:
         enemy.rect.x += 20  # Move the enemy back upon collision
-    # ========================= DONE ========================= #
+
+    # Check if player's health reaches zero
+    if player.health <= 0:
+        game_over_screen(screen)  # Display the game over screen
+        running = False  # Exit the game loop
+
+    # ====================================== DONE =============================================== #
 
     # Flip screen so user can see it
     pygame.display.flip()

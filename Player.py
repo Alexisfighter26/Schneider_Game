@@ -60,5 +60,11 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] and self.on_ground:
             self.vel_y = self.jump_power
 
+    def draw_health(self, screen):
+        font = pygame.font.Font(None, 36)
+        health_text = font.render(f'Health: {self.health}', True, (255, 255, 255))
+        text_position = (10, screen.get_height() - health_text.get_height() - 10)  # Bottom left position
+        screen.blit(health_text, text_position)
+
     def draw_plyr(self, screen):
         screen.blit(self.image, self.rect)  # Draw the player image onto the screen
