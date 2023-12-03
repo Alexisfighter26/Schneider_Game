@@ -26,19 +26,30 @@ def create_platforms(platform_group):
         platform_group.add(platform)
 
 
-    # Specially placed platforms
+    # -------- Specially placed platforms ------ #
 
     # Create Instance of Platforms
-    platform1 = Platform(1136, 64)
+    platform1 = Platform(1136, 128)
+
+    # --- Top 3 middle ---- #
     platform2 = Platform(600, 278)
     platform3 = Platform(664, 278)
     platform4 = Platform(536, 278)
-    platform5 = Platform(192, 522)
-    platform6 = Platform(256, 522)
-    platform7 = Platform(320, 522)
-    platform8 = Platform(384, 522)
-    platform9 = Platform(448, 522)
-    platform10 = Platform(512, 522)
+
+    # --- above top 3 middle ---- #
+    platform5 = Platform(600, 100)
+    platform6 = Platform(664, 100)
+
+    # ---- Far right ---- #
+    platform7 = Platform(944, 128)
+    platform10 = Platform(1136, 128)
+
+
+    # ---- Top 2 left --- #
+    platform8 = Platform(192, 150)
+    platform9 = Platform(256, 150)
+
+    '''platform10 = Platform(512, 522)
     platform11 = Platform(576, 522)
     platform12 = Platform(640, 522)
     platform13 = Platform(704, 522)
@@ -49,9 +60,9 @@ def create_platforms(platform_group):
     platform18 = Platform(832, 522)
     platform19 = Platform(704, 422)
     platform20 = Platform(768, 422)
-    platform21 = Platform(832, 422)
+    platform21 = Platform(832, 422)'''
 
         # Add platforms to the platform group
     platform_group.add(platform1, platform2, platform3, platform4,
-                        platform5, platform6, platform7, platform8, platform9,
-                        platform10, platform11, platform12, platform13, platform14, platform15)
+                        platform5, platform6, platform7, platform8, platform9)#,
+                       #platform10, platform11, platform12, platform13, platform14, platform15)

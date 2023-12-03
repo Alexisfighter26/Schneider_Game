@@ -5,12 +5,12 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Load the player image
-        self.image = pygame.image.load('assets/sprites/sus.png').convert_alpha()
+        self.image = pygame.image.load('assets/sprites/alienGreen_walk.png').convert_alpha()
         self.rect = self.image.get_rect(center=(25, 422))  # Set the initial position of the player
 
         # Initialize the player's vertical velocity, jump power, gravity, and ground flag
         self.vel_y = 0
-        self.jump_power = -14
+        self.jump_power = -16
         self.gravity = 0.6
         self.on_ground = False  # Flag to track whether the player is on the ground
         self.health = 100
@@ -51,12 +51,17 @@ class Player(pygame.sprite.Sprite):
         elif self.rect.right > screen_width:
             self.rect.right = screen_width
 
-        if self.rect.top < 0:
+        if self.rect.bottom > screen_height:
+            self.rect.bottom = screen_height
+            self.vel_y = 0
+            self.on_ground = True  # Set the on_ground flag when reaching the bottom'''
+
+        '''if self.rect.top < 0:
             self.rect.top = 0
         elif self.rect.bottom > screen_height:
             self.rect.bottom = screen_height
             self.vel_y = 0
-            self.on_ground = True  # Set the on_ground flag when reaching the bottom
+            self.on_ground = True  # Set the on_ground flag when reaching the bottom'''
 
         # Jumping mechanism
         if keys[pygame.K_SPACE] and self.on_ground:
@@ -74,11 +79,14 @@ class Player(pygame.sprite.Sprite):
         text_position = (10, 10)  # Top-left corner
         screen.blit(points_text, text_position)
 
-    def increase_health(self, health_value):
-        # Update player's health by the provided health value
-        self.health += health_value
-        # Optional: Add logic to limit the maximum health if needed
-        self.health = min(self.health, self.max_health)
+    def increase_health(self, amount):
+        # Check if the current health is less than the maximum health
+        if self.health < self.max_health:
+            self.health += amount  # Increase player's health by the specified amount
+
+            # Check if the health exceeds the maximum limit
+            if self.health > self.max_health:
+                self.health = self.max_health  # Cap the health to the maximum limit
 
     def draw_plyr(self, screen):
         screen.blit(self.image, self.rect)  # Draw the player image onto the screen

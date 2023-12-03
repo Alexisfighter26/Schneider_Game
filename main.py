@@ -51,16 +51,17 @@ mixer.music.play()
 # Instance of Player
 player = Player()
 
-# ------------- Jewel instance ----------------- #
+# ------------- Jewel/HealthItem instance ----------------- #
 
 # Create group instance of Jewel
 jewel_group = pygame.sprite.Group()
+HealthItem_group = pygame.sprite.Group()
 # The instance of Jewel
 jewel1 = Jewel()
+healthItem1 = HealthItem()
 # Creating an instance of Enemy and adding it to the enemy_group
 jewel_group.add(jewel1)
-
-# ------------- End of Jewel instance ----------------- #
+HealthItem_group.add(healthItem1)
 
 # ------------- Enemies instance ----------------- #
 # Create group instance of Enemy
@@ -88,8 +89,8 @@ while running:
     screen.blit(background, (0, 0))
     screen.blit(tiles, (0, 0))
     screen.blit(tiles2, (640, 0))
-    screen.blit(hills, (335, 0))
-    screen.blit(hills2, (28, 0))
+    screen.blit(hills, (0, 0))
+    screen.blit(hills2, (640, 0))
 
     # Draw Platforms
     platform_group.draw(screen)
@@ -104,6 +105,7 @@ while running:
 
     # Drawing Jewels
     jewel_group.draw(screen)
+    HealthItem_group.draw(screen)
 
     # ------- Updating the Points ---------#
 
@@ -131,16 +133,25 @@ while running:
         jewel_group.add(new_jewel)
 
         player.draw_points(screen)
-    # =================== Interactions between enemy and player ============================ #
+    # =================== Interactions between objects/Enemy and player ============================ #
+
+    #--------- Health objects ----------- #
+    collided_health_items = pygame.sprite.spritecollide(player, HealthItem_group, True)
+    for health_item in collided_health_items:
+        health_item.interact(player)
+
+        new_health_item = HealthItem()
+        HealthItem_group.add(new_health_item)
+
+# -------------- Enemy / player interaction ---------------- #
 
     # Inside your game loop handling collisions between the player and enemy
     enemy_hit_list = pygame.sprite.spritecollide(player, enemy_group, False)
     for enemy in enemy_hit_list:
         # Subtract health when player collides with an enemy
-        player.health -= 10  # Reduce player's health by 10 (adjusting this value)
+        player.health -= 5  # Reduce player's health by 10 (adjusting this value)
 
-
-        # For example, if enemy has a knockback effect:
+        # #nemy has a knockback effect:
         enemy.rect.x += 20  # Move the enemy back upon collision
 
     # Check if player's health reaches zero
