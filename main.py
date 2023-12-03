@@ -57,10 +57,13 @@ player = Player()
 jewel_group = pygame.sprite.Group()
 HealthItem_group = pygame.sprite.Group()
 # The instance of Jewel
+
 jewel1 = Jewel()
-healthItem1 = HealthItem()
-# Creating an instance of Enemy and adding it to the enemy_group
+jewel1.set_random_position(screen_width, screen_height, platform_group)
 jewel_group.add(jewel1)
+
+healthItem1 = HealthItem()
+healthItem1.set_random_position(screen_width, screen_height, platform_group)
 HealthItem_group.add(healthItem1)
 
 # ------------- Enemies instance ----------------- #
@@ -104,8 +107,8 @@ while running:
     enemy_group.draw(screen)
 
     # Drawing Jewels
-    jewel_group.draw(screen)
-    HealthItem_group.draw(screen)
+    #jewel_group.draw(screen)
+    #HealthItem_group.draw(screen)
 
     # ------- Updating the Points ---------#
 
@@ -131,17 +134,26 @@ while running:
         # Create a new instance of the jewel and add it to the jewel group
         new_jewel = Jewel()
         jewel_group.add(new_jewel)
+        new_jewel.set_random_position(screen_width, screen_height, platform_group)
+
 
         player.draw_points(screen)
     # =================== Interactions between objects/Enemy and player ============================ #
 
     #--------- Health objects ----------- #
+
+
     collided_health_items = pygame.sprite.spritecollide(player, HealthItem_group, True)
     for health_item in collided_health_items:
         health_item.interact(player)
 
         new_health_item = HealthItem()
+        new_health_item.set_random_position(screen_width, screen_height, platform_group)
         HealthItem_group.add(new_health_item)
+
+# ---- Drawing on screen --- #
+    jewel_group.draw(screen)
+    HealthItem_group.draw(screen)
 
 # -------------- Enemy / player interaction ---------------- #
 
