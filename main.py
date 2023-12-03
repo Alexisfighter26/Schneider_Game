@@ -5,6 +5,7 @@ from Player import Player
 from Enemies import Enemy
 from Background import create_platforms
 from loading_screens import *
+from objects import Jewel
 import math
 
 # Initialize Pygame
@@ -49,14 +50,25 @@ mixer.music.play()
 # Instance of Player
 player = Player()
 
-# Create group Instance of Enemy
-enemy_group = pygame.sprite.Group()
+# ------------- Jewel instance ----------------- #
+# Create group instance of Jewel
+jewel_group = pygame.sprite.Group()
+# The instance of Jewel
+jewel1 = Jewel()
+# Creating an instance of Enemy and adding it to the enemy_group
+jewel_group.add(jewel1)
 
+# ------------- End of Jewel instance ----------------- #
+
+# ------------- Enemies instance ----------------- #
+# Create group instance of Enemy
+enemy_group = pygame.sprite.Group()
 # The instance of enemies
 enemy1 = Enemy()
-
 # Creating an instance of Enemy and adding it to the enemy_group
 enemy_group.add(enemy1)
+# ------------- Enemies instance done ----------------- #
+
 
 # ===== END OF CREATION ====== #
 
@@ -80,14 +92,20 @@ while running:
     # Draw Platforms
     platform_group.draw(screen)
 
-    # ====== Draw Entities ============= #
+    # ====== Drawing Entities ============= #
 
     # Drawing player
     player.draw_plyr(screen)
-    player.draw_health(screen)
 
     # Drawing enemies
     enemy_group.draw(screen)
+
+    # Drawing Jewels
+    jewel_group.draw(screen)
+
+    #------- Updating the Points ---------#
+    player.draw_points(screen)
+    player.draw_health(screen)
 
     # ====== Entities Update ============================================= #
 
@@ -95,12 +113,22 @@ while running:
     player.update_plyr_position(screen_width, screen_height, platform_group)
 
     # Update Enemy
-    enemy_group.update()
+    #enemy_group.update()
+    for enemy in enemy_group:
+        enemy.update(player)
+    # =================== Interactions between Jewels and player ============================ #
+
+    jewels_collected = pygame.sprite.spritecollide(player, jewel_group, True)
+    for jewel in jewels_collected:
+        player.points += jewel.points  # Increase player's points upon collision with a jewel
+
+        # Create a new instance of the jewel and add it to the jewel group
+        new_jewel = Jewel()
+        jewel_group.add(new_jewel)
 
     # =================== Interactions between enemy and player ============================ #
 
     # Inside your game loop handling collisions between the player and enemy
-
     enemy_hit_list = pygame.sprite.spritecollide(player, enemy_group, False)
     for enemy in enemy_hit_list:
         # Subtract health when player collides with an enemy

@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.6
         self.on_ground = False  # Flag to track whether the player is on the ground
         self.health = 100
+        self.points = 0
 
     def update_plyr_position(self, screen_width, screen_height, platform_group):
         keys = pygame.key.get_pressed()  # Define keyboard mechanics
@@ -65,6 +66,12 @@ class Player(pygame.sprite.Sprite):
         health_text = font.render(f'Health: {self.health}', True, (255, 255, 255))
         text_position = (10, screen.get_height() - health_text.get_height() - 10)  # Bottom left position
         screen.blit(health_text, text_position)
+
+    def draw_points(self, screen):
+        font = pygame.font.Font(None, 36)
+        points_text = font.render(f'Points: {self.points}', True, (255, 255, 255))
+        text_position = (10, 10)  # Top-left corner
+        screen.blit(points_text, text_position)
 
     def draw_plyr(self, screen):
         screen.blit(self.image, self.rect)  # Draw the player image onto the screen
