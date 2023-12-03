@@ -7,6 +7,7 @@ from Background import create_platforms
 from loading_screens import *
 # from objects import Jewel
 from objects import *
+pygame.time
 import math
 
 # Initialize Pygame
