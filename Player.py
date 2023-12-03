@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = 0
         self.jump_power = -16
         self.gravity = 0.6
-        self.on_ground = False  # Flag to track whether the player is on the ground
+        self.on_ground = False  # Tracks whether the player is on the ground
         self.health = 100
         self.max_health = 200
         self.points = 0
@@ -36,12 +36,12 @@ class Player(pygame.sprite.Sprite):
             if self.vel_y > 0:
                 self.rect.bottom = platform.rect.top
                 self.vel_y = 0
-                self.on_ground = True  # Set the on_ground flag when landing on a platform
+                self.on_ground = True  # Set on_ground when landing on a platform
             elif self.vel_y < 0:
                 self.rect.top = platform.rect.bottom
                 self.vel_y = 0
 
-        # Update the on_ground flag if the player is not colliding with any platforms
+        # Update the on_ground if the player is not colliding with any platforms
         if not collisions:
             self.on_ground = False
 
@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > screen_height:
             self.rect.bottom = screen_height
             self.vel_y = 0
-            self.on_ground = True  # Set the on_ground flag when reaching the bottom'''
+            self.on_ground = True  # Set on_ground flag when reaching the bottom
 
         # Jumping mechanism
         if keys[pygame.K_SPACE] and self.on_ground:

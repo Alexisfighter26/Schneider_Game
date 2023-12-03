@@ -9,16 +9,27 @@ def intro_screen(screen):
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:  # Start the game on spacebar press
+                if event.key == pygame.K_SPACE:  # Start the game on space bar
                     intro = False
 
         # Fill the screen with a background color
-        screen.fill((0, 0, 0))  # Black background
+        screen.fill((32, 86, 140))  # Black background
 
         # Render and display text on the screen
         font = pygame.font.Font(None, 36)
-        text = font.render("Treasure hunter", True, (255, 255, 255))  # Text, antialiasing, color
-        text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+        text = font.render("Treasure hunter", True, (0, 0, 0))  # Text, antialiasing, color
+
+        # Adjust vertical position to move the text higher on the screen
+        vertical_offset = 100  # Change this value to move the text higher or lower
+        text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - vertical_offset))
+        screen.blit(text, text_rect)
+
+        # Render and display directions with a smaller font size
+        directions_font = pygame.font.Font(None, 36)  # Smaller font size for the directions
+
+        # Adjust vertical position to move the text higher on the screen
+        vertical_offset = 100  # Change this value to move the text higher or lower
+        text_rect = text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - vertical_offset))
         screen.blit(text, text_rect)
 
         # Additional instructions or information
@@ -33,8 +44,9 @@ def intro_screen(screen):
 
         instructions3 = font.render(" TIPS : Green crystals for health, BEWARE! lots of gems = lots of enemies ", True,
                                     (255, 255, 255))
-        instructions3_rect = instructions2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 150))
+        instructions3_rect = instructions3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 150))
         screen.blit(instructions3, instructions3_rect)
+
 
         pygame.display.update()
 
