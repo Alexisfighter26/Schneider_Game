@@ -4,7 +4,6 @@ import random
 screen_width = 1200
 screen_height = 428
 
-
 class Jewel(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()

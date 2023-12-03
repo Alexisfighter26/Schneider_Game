@@ -56,13 +56,6 @@ class Player(pygame.sprite.Sprite):
             self.vel_y = 0
             self.on_ground = True  # Set the on_ground flag when reaching the bottom'''
 
-        '''if self.rect.top < 0:
-            self.rect.top = 0
-        elif self.rect.bottom > screen_height:
-            self.rect.bottom = screen_height
-            self.vel_y = 0
-            self.on_ground = True  # Set the on_ground flag when reaching the bottom'''
-
         # Jumping mechanism
         if keys[pygame.K_SPACE] and self.on_ground:
             self.vel_y = self.jump_power

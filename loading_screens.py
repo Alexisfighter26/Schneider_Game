@@ -22,9 +22,19 @@ def intro_screen(screen):
         screen.blit(text, text_rect)
 
         # Additional instructions or information
-        instructions = font.render("Press SPACE to start", True, (255, 255, 255))
+        instructions = font.render("Objective: Collect as MANY yellow Gems as possible", True, (255, 255, 255))
         instructions_rect = instructions.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
         screen.blit(instructions, instructions_rect)
+
+        # Additional instructions or information
+        instructions2 = font.render("Press SPACE to start, arrow keys and space bar for movement", True, (255, 255, 255))
+        instructions2_rect = instructions2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 100))
+        screen.blit(instructions2, instructions2_rect)
+
+        instructions3 = font.render(" TIPS : Green crystals for health, BEWARE! lots of gems = lots of enemies ", True,
+                                    (255, 255, 255))
+        instructions3_rect = instructions2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 150))
+        screen.blit(instructions3, instructions3_rect)
 
         pygame.display.update()
 

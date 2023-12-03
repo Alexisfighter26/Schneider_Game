@@ -5,10 +5,7 @@ from Player import Player
 from Enemies import Enemy
 from Background import create_platforms
 from loading_screens import *
-# from objects import Jewel
 from objects import *
-pygame.time
-import math
 
 # Initialize Pygame
 pygame.init()
@@ -17,6 +14,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Defining screen dimensions (easier to set bounds for character)
+
 screen_width = 1200
 screen_height = 486
 
@@ -36,7 +34,7 @@ tiles2 = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
 hills = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 hills2 = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 
-# ---------------------------- Creating the obstructions / platforms ------------------ #
+# -------------------- Creating the obstructions / platforms ------------------ #
 
 platform_group = pygame.sprite.Group()
 create_platforms(platform_group)
@@ -49,7 +47,7 @@ mixer.music.play()
 
 # ================ Creating  Entities ===================== #
 
-# Instance of Player
+# Instance of Player (so attributes are accessible)
 player = Player()
 
 # ------------- Jewel/HealthItem instance ----------------- #
@@ -57,12 +55,13 @@ player = Player()
 # Create group instance of Jewel
 jewel_group = pygame.sprite.Group()
 HealthItem_group = pygame.sprite.Group()
-# The instance of Jewel
 
+# The instance of Jewel
 jewel1 = Jewel()
 jewel1.set_random_position(screen_width, screen_height, platform_group)
 jewel_group.add(jewel1)
 
+# Instance of Health Item
 healthItem1 = HealthItem()
 healthItem1.set_random_position(screen_width, screen_height, platform_group)
 HealthItem_group.add(healthItem1)
@@ -75,7 +74,7 @@ enemy1 = Enemy()
 # Creating an instance of Enemy and adding it to the enemy_group
 enemy_group.add(enemy1)
 # ------------- Enemies instance done ----------------- #
-
+spawn_enemy = True
 
 # ===== END OF CREATION ====== #
 
@@ -106,11 +105,6 @@ while running:
 
     # Drawing enemies
     enemy_group.draw(screen)
-
-    # Drawing Jewels
-    #jewel_group.draw(screen)
-    #HealthItem_group.draw(screen)
-
     # ------- Updating the Points ---------#
 
     player.draw_points(screen)
@@ -122,7 +116,6 @@ while running:
     player.update_plyr_position(screen_width, screen_height, platform_group)
 
     # Update Enemy
-    #enemy_group.update()
     for enemy in enemy_group:
         enemy.update(player)
 
@@ -162,12 +155,26 @@ while running:
     enemy_hit_list = pygame.sprite.spritecollide(player, enemy_group, False)
     for enemy in enemy_hit_list:
         # Subtract health when player collides with an enemy
-        player.health -= 5  # Reduce player's health by 10 (adjusting this value)
+        player.health -= 5  # Reduce player's health by 5 (adjusting this value)
 
         # #nemy has a knockback effect:
-        enemy.rect.x += 20  # Move the enemy back upon collision
+        enemy.rect.x += 30  # Move the enemy back upon collision
 
-    # Check if player's health reaches zero
+        # Condition to spawn an enemy based on points
+        if player.points >= 20 and spawn_enemy:
+            new_enemy = Enemy()  # Create a new enemy instance
+
+            # Set the initial position of the new enemy to random coordinates
+            new_enemy.rect.x = random.randint(0, screen_width - new_enemy.rect.width)
+            new_enemy.rect.y = random.randint(0, screen_height - new_enemy.rect.height)
+
+            # Add the new enemy to the enemy group
+            enemy_group.add(new_enemy)
+
+            # Set the flag to False to prevent spawning multiple enemies at once
+            spawn_enemy = False
+
+    # Check if player's health reaches zero or less
     if player.health <= 0:
         game_over_screen(screen)  # Display the game over screen
         running = False  # Exit the game loop
