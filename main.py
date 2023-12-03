@@ -6,6 +6,7 @@ from Enemies import Enemy
 from Background import Platform
 import math
 
+
 # Initialize Pygame
 pygame.init()
 
@@ -31,16 +32,22 @@ background_rect = background.get_rect()
 platform_group = pygame.sprite.Group()
 
 # Create Instance of Platforms
-platform1 = Platform(300, 500)
-platform2 = Platform(100, 400)
-platform3 = Platform(500, 300)
+platform1 = Platform(1136, 64)
+platform2 = Platform(0, 422)
+platform3 = Platform(64, 422)
+platform4 = Platform(128, 422)
+platform5 = Platform(192, 422)
+platform6 = Platform(256, 422)
+platform7 = Platform(320, 200)
+
 
 # Add platforms to the platform group
-platform_group.add(platform1, platform2, platform3)
+
+platform_group.add(platform1, platform2, platform3,platform4, platform5, platform6, platform7)
 
 # define scrolling variable (will prob delete)
 scroll = 0
-tiles = math.ceil(screen_width  / background_width) + 1
+tiles = math.ceil(screen_width / background_width) + 1
 
 # Background Sound!
 mixer.init()
