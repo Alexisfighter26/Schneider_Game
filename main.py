@@ -3,8 +3,9 @@ import pygame
 from pygame import mixer
 from Player import Player
 from Enemies import Enemy
-from Background import Platform
 import math
+from Background import create_platforms
+
 
 
 # Initialize Pygame
@@ -31,19 +32,7 @@ background_rect = background.get_rect()
 
 platform_group = pygame.sprite.Group()
 
-# Create Instance of Platforms
-platform1 = Platform(1136, 64)
-platform2 = Platform(0, 422)
-platform3 = Platform(64, 422)
-platform4 = Platform(128, 422)
-platform5 = Platform(192, 422)
-platform6 = Platform(256, 422)
-platform7 = Platform(320, 200)
-
-
-# Add platforms to the platform group
-
-platform_group.add(platform1, platform2, platform3,platform4, platform5, platform6, platform7)
+create_platforms(platform_group)
 
 # define scrolling variable (will prob delete)
 scroll = 0

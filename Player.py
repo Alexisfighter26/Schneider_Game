@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.on_ground = False  # Flag to track whether the player is on the ground
 
     def update_plyr_position(self, screen_width, screen_height, platform_group):
-        keys = pygame.key.get_pressed()  # Get the state of all keyboard keys
+        keys = pygame.key.get_pressed()  # Define keyboard mechanics
 
         # Horizontal movement
         if keys[pygame.K_LEFT]:
