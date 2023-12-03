@@ -5,11 +5,13 @@ from Player import Player
 from Enemies import Enemy
 import math
 from Background import create_platforms
-
+from Intro import *
 
 
 # Initialize Pygame
 pygame.init()
+
+
 
 # Create Pygame clock
 clock = pygame.time.Clock()
@@ -19,22 +21,19 @@ screen_width = 1200
 screen_height = 486
 
 # =========================================== Create the screen =========================================== #
-
-# ================================TESTING ================ #
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-# Background
+# ------------- Intro Screen ----------- #
+intro_screen(screen)
+
+# ----------------------Background-------------------- #
 background = pygame.image.load("assets/sprites/set1_background.png").convert()
 tiles = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
 tiles2 = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
 hills = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 hills2 = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 
-#hills =
-background_width = background.get_width()
-background_rect = background.get_rect()
-
-# ========================= Creating the obstructions / platforms ================== #
+# ---------------------------- Creating the obstructions / platforms ------------------ #
 
 platform_group = pygame.sprite.Group()
 create_platforms(platform_group)
