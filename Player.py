@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_power = -14
         self.gravity = 0.6
         self.on_ground = False  # Flag to track whether the player is on the ground
+        self.health = 100
 
     def update_plyr_position(self, screen_width, screen_height, platform_group):
         keys = pygame.key.get_pressed()  # Define keyboard mechanics
