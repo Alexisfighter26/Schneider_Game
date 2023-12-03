@@ -51,6 +51,7 @@ mixer.music.play()
 player = Player()
 
 # ------------- Jewel instance ----------------- #
+
 # Create group instance of Jewel
 jewel_group = pygame.sprite.Group()
 # The instance of Jewel
@@ -104,6 +105,11 @@ while running:
     jewel_group.draw(screen)
 
     #------- Updating the Points ---------#
+    player.draw_health(screen)
+
+    # Drawing Jewels
+    jewel_group.draw(screen)
+    # ------- Updating the Points ---------#
     player.draw_points(screen)
     player.draw_health(screen)
 
@@ -116,7 +122,7 @@ while running:
     #enemy_group.update()
     for enemy in enemy_group:
         enemy.update(player)
- 
+
     # =================== Interactions between Jewels and player ============================ #
 
     jewels_collected = pygame.sprite.spritecollide(player, jewel_group, True)
@@ -127,6 +133,7 @@ while running:
         new_jewel = Jewel()
         jewel_group.add(new_jewel)
 
+        player.draw_points(screen)
     # =================== Interactions between enemy and player ============================ #
 
     # Inside your game loop handling collisions between the player and enemy
