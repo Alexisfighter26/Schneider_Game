@@ -18,12 +18,15 @@ screen_width = 1200
 screen_height = 486
 
 # =========================================== Create the screen =========================================== #
+
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 # ------------- Intro Screen ----------- #
+
 intro_screen(screen)
 
 # ----------------------Background-------------------- #
+
 background = pygame.image.load("assets/sprites/set1_background.png").convert()
 tiles = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
 tiles2 = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
@@ -36,6 +39,7 @@ platform_group = pygame.sprite.Group()
 create_platforms(platform_group)
 
 # -------------------- Background Sound --------------------------------#
+
 mixer.init()
 mixer.music.load("assets/sound/backgroundmusic.ogg")
 mixer.music.play()
@@ -94,13 +98,15 @@ while running:
     enemy_group.update()
 
     # =================== Interactions between enemy and player ============================ #
-    # Inside your game loop where you handle collisions between the player and enemy
+
+    # Inside your game loop handling collisions between the player and enemy
+
     enemy_hit_list = pygame.sprite.spritecollide(player, enemy_group, False)
     for enemy in enemy_hit_list:
         # Subtract health when player collides with an enemy
-        player.health -= 10  # Reduce player's health by 10 (you can adjust this value)
+        player.health -= 10  # Reduce player's health by 10 (adjusting this value)
 
-        # You can add more logic here, such as enemy bounce-back or removing the enemy
+
         # For example, if enemy has a knockback effect:
         enemy.rect.x += 20  # Move the enemy back upon collision
 
