@@ -5,7 +5,8 @@ from Player import Player
 from Enemies import Enemy
 from Background import create_platforms
 from loading_screens import *
-from objects import Jewel
+# from objects import Jewel
+from objects import *
 import math
 
 # Initialize Pygame
@@ -104,12 +105,8 @@ while running:
     # Drawing Jewels
     jewel_group.draw(screen)
 
-    #------- Updating the Points ---------#
-    player.draw_health(screen)
-
-    # Drawing Jewels
-    jewel_group.draw(screen)
     # ------- Updating the Points ---------#
+
     player.draw_points(screen)
     player.draw_health(screen)
 

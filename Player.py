@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.6
         self.on_ground = False  # Flag to track whether the player is on the ground
         self.health = 100
+        self.max_health = 200
         self.points = 0
 
     def update_plyr_position(self, screen_width, screen_height, platform_group):
@@ -72,6 +73,12 @@ class Player(pygame.sprite.Sprite):
         points_text = font.render(f'Points: {self.points}', True, (255, 255, 255))
         text_position = (10, 10)  # Top-left corner
         screen.blit(points_text, text_position)
+
+    def increase_health(self, health_value):
+        # Update player's health by the provided health value
+        self.health += health_value
+        # Optional: Add logic to limit the maximum health if needed
+        self.health = min(self.health, self.max_health)
 
     def draw_plyr(self, screen):
         screen.blit(self.image, self.rect)  # Draw the player image onto the screen
