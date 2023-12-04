@@ -1,5 +1,6 @@
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -14,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.6
         self.on_ground = False  # Tracks whether the player is on the ground
         self.health = 100
-        self.max_health = 200
+        self.max_health = 300
         self.points = 0
 
     def update_plyr_position(self, screen_width, screen_height, platform_group):

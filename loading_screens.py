@@ -16,7 +16,7 @@ def intro_screen(screen):
         screen.fill((32, 86, 140))  # Black background
 
         # Render and display text on the screen
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font('assets/font/Black_Crayon.ttf', 36)
         text = font.render("Treasure hunter", True, (0, 0, 0))  # Text, antialiasing, color
 
         # Adjust vertical position to move the text higher on the screen
@@ -51,10 +51,16 @@ def intro_screen(screen):
         pygame.display.update()
 
  # ================================== GAME OVER SCREEN ====================================== #
-def game_over_screen(screen):
+def game_over_screen(screen, player):
     font = pygame.font.Font(None, 50)
     game_over_text = font.render("Game Over", True, (255, 0, 0))  # Red text
-    text_rect = game_over_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+    text_rect = game_over_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 ))
+
+    def draw_points(self, screen):
+        font = pygame.font.Font(None, 36)
+        points_text = font.render(f'Points: {self.points}', True, (255, 255, 255))
+        text_position = (10, 10)  # Top-left corner
+
 
     while True:
         for event in pygame.event.get():
@@ -63,6 +69,8 @@ def game_over_screen(screen):
                 sys.exit()
 
         screen.fill((0, 0, 0))  # Black background
+
         screen.blit(game_over_text, text_rect)
+        screen.blit(points_text, text_position)
 
         pygame.display.update()
