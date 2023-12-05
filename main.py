@@ -13,7 +13,7 @@ pygame.init()
 # Create Pygame clock (controls how fast the game runs)
 clock = pygame.time.Clock()
 
-# Defining screen dimensions (e5asier to set bounds for character)
+# Defining screen dimensions (easier to set bounds for character)
 
 screen_width = 1200
 screen_height = 486
@@ -22,9 +22,9 @@ screen_height = 486
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-# ------------- Intro Screen ----------- #
+# ------------- Calling Intro Screen (loading_screen.py) ----------- #
 
-# This is a function that passes 'screen' through the function
+# This is a function that passes 'screen' through the function and displays my intro screen
 intro_screen(screen)
 
 # ----------------------Background-------------------- #
@@ -35,11 +35,10 @@ tiles2 = pygame.image.load("assets/sprites/set1_tiles.png").convert_alpha()
 hills = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 hills2 = pygame.image.load("assets/sprites/set1_hills.png").convert_alpha()
 
-# -------------------- Creating the obstructions / platforms ------------------ #
+# -------------------- Creating the obstructions / platforms ---(Background.py)--------------- #
 
-# initializes an empty sprite group that will hold instances of my platform sprite
-platform_group = pygame.sprite.Group()
-create_platforms(platform_group)
+platform_group = pygame.sprite.Group() # Making an empty a sprite group for platforms and initializing it as an empty group
+create_platforms(platform_group) # Using a function to add platform sprites into the platform_group.
 
 # -------------------- Background Sound --------------------------------#
 
@@ -49,21 +48,20 @@ mixer.music.play()
 
 # ================ Creating  Entities ===================== #
 
-# Instance of Player (so attributes are accessible)
+# Creating instance of Player (so attributes are accessible)
 player = Player()
 
 # ------------- Jewel/HealthItem instance ----------------- #
 
-# Create group instance of Jewel (same thing as Platform) # initializes an empty sprite group
-# that will hold instances of my platform sprite
+# Create group instance of Jewel/Health (same thing as Platform) # initializes an empty sprite group
 jewel_group = pygame.sprite.Group()
 HealthItem_group = pygame.sprite.Group()
 
-# The instance of Jewel. It sets a random position after a jewel s hit
-jewel1 = Jewel()
-# platform ensures It doesn't spawn in the platforms (checks collisions)
+jewel1 = Jewel() # Making new instance of Jewel
+
+# Setting a random position for the jewel and making it not collide with the platforms
 jewel1.set_random_position(screen_width, screen_height, platform_group)
-# Adds the jewel1 instance to a group called jewel_group
+# Adds the jewel1 instance to a group called jewel_group (It will add the newly generated jewels to pop up)
 jewel_group.add(jewel1)
 
 
@@ -124,23 +122,25 @@ while running:
     # Update Player Position (Two arguments are passed, screen_width and screen_height)
     player.update_plyr_position(screen_width, screen_height, platform_group)
 
-    # Update Enemy (Passing the player object as an argument allows enemy to utilize the information stored in player object. )
+    # This loops the enemy in the group to update based on the player position (makes the enemy follow my character)
     for enemy in enemy_group:
         enemy.update(player)
 
-    # =================== Interactions between Jewels and player ============================ #
+    # =================== Interactions between Jewels points and player ============================ #
 
+    # Detects collisions between player and object (the kill function deletes the jewel upon collision)
     jewels_collected = pygame.sprite.spritecollide(player, jewel_group, True)
-    # for loop in which checks each collided jewel with player
-    for jewel in jewels_collected:
-        player.points += jewel.points  # Increase player's points upon collision with a jewel
 
-        # Create a new instance of the jewel and add it to the jewel group
-        new_jewel = Jewel()
-        jewel_group.add(new_jewel)
-        new_jewel.set_random_position(screen_width, screen_height, platform_group)
-        # show the points onto the screen
-        player.draw_points(screen)
+    # for loop in object jewel with jewels_collected
+    for jewel in jewels_collected:
+        player.points += jewel.points  # Increase player.points to the value stored by jewel.points (just adding)
+
+        new_jewel = Jewel() # Create a new instance of the jewel
+        jewel_group.add(new_jewel) # add it to the jewel group
+        new_jewel.set_random_position(screen_width, screen_height, platform_group) # Randomize positioning
+
+        player.draw_points(screen)    # show the points onto the screen
+
     # =================== Interactions between objects/Enemy and player ============================ #
 
     #--------- Health objects ----------- #
@@ -153,6 +153,7 @@ while running:
         HealthItem_group.add(new_health_item)  # Add the new health item to the group of health items
 
 # ---- Drawing on screen --- #
+
     jewel_group.draw(screen)
     HealthItem_group.draw(screen)
 
@@ -162,15 +163,14 @@ while running:
     enemy_hit_list = pygame.sprite.spritecollide(player, enemy_group, False)
     for enemy in enemy_hit_list:
         # Subtract health when player collides with an enemy
-        player.health -= 5  # Reduce player's health by 5 (adjusting this value)
+        player.health -= 5  # Reduce player's health by 5 (adjustable)
 
         #Enemy has a knockback effect:
-        enemy.rect.x += 30  # Move the enemy back upon
+        enemy.rect.x += 30  # Move the enemy in the x positive direction (add 30)
 
-       # Condition to spawn an enemy every 10 points
+       '''# Condition to spawn an enemy every 10 points
         if player.points % 10 == 0 and spawn_enemy:  # Spawning an enemy every 20 points
 
-            #can_spawn_enemy = True
             new_enemy = Enemy()  # Create a new enemy instance
             # Set the initial position of the new enemy to random coordinates
             new_enemy.rect.x = random.randint(0, screen_width - new_enemy.rect.width)
@@ -181,7 +181,7 @@ while running:
             enemy_group.add(new_enemy)
             # Set the flag to False to prevent spawning multiple enemies at once
             can_spawn_enemy = False
-            spawn_enemy = True
+            spawn_enemy = True'''
 
     # Check if player's health reaches zero or less
     if player.health <= 0:
