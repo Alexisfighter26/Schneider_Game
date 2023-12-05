@@ -36,5 +36,5 @@ class Enemy(pygame.sprite.Sprite):
         elif self.rect.bottom > screen_height:  # If the enemy exceeds the bottom boundary
             self.rect.bottom = screen_height  # Set the enemy's bottom side to the screen's bottom edge
             self.vel_y = 0  # Stop vertical movement
-            self.on_ground = True  # Set on_ground flag when reaching the bottom
+            self.on_ground = True  # Set on_ground when reaching the bottom
 

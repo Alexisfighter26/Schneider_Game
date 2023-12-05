@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
 
         # Load the player image
         self.image = pygame.image.load('assets/sprites/alienGreen_walk.png').convert_alpha()
-        self.rect = self.image.get_rect(center=(25, 422))  # Set the initial position of the player
+        self.rect = self.image.get_rect(center=(25, 422))  # Set the initial position of player
 
         # Initialize the player's vertical velocity, jump power, gravity, and ground flag
         self.vel_y = 0
@@ -34,25 +34,30 @@ class Player(pygame.sprite.Sprite):
         # Check collisions with platforms
         collisions = pygame.sprite.spritecollide(self, platform_group, False)
         for platform in collisions:
-            if self.vel_y > 0:
-                self.rect.bottom = platform.rect.top
-                self.vel_y = 0
+            if self.vel_y > 0: # object moving downwards
+                self.rect.bottom = platform.rect.top # Set the object's bottom position to the top of the platform
+                self.vel_y = 0 # # Stop the object's vertical movement
                 self.on_ground = True  # Set on_ground when landing on a platform
             elif self.vel_y < 0:
-                self.rect.top = platform.rect.bottom
-                self.vel_y = 0
+                self.rect.top = platform.rect.bottom # Set the object's top position to the bottom of the platform
+                self.vel_y = 0 # Stop the object's vertical movement
 
         # Update the on_ground if the player is not colliding with any platforms
         if not collisions:
             self.on_ground = False
 
         # Apply screen boundaries
+
+        # left boundary
         if self.rect.left < 0:
             self.rect.left = 0
+        # right boundary
         elif self.rect.right > screen_width:
             self.rect.right = screen_width
 
+        # Check object if bottom of screen
         if self.rect.bottom > screen_height:
+            # Keep the object in bottom screen boundary
             self.rect.bottom = screen_height
             self.vel_y = 0
             self.on_ground = True  # Set on_ground flag when reaching the bottom

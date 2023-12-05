@@ -12,7 +12,8 @@ class Jewel(pygame.sprite.Sprite):
         self.points = 10
 
     def set_random_position(self, screen_width, screen_height, platform_group):
-        valid_position = False
+        valid_position = False # initializes a variable named valid_position
+        # Now it will loop until valid position is true
         while not valid_position:
             self.rect.x = random.randint(0, screen_width - self.rect.width)
             self.rect.y = random.randint(0, screen_height - self.rect.height)

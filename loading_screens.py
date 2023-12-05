@@ -1,7 +1,6 @@
 import pygame
 import sys
 
-
 def intro_screen(screen):
     intro = True
     while intro:
@@ -43,7 +42,7 @@ def intro_screen(screen):
         instructions2_rect = instructions2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 100))
         screen.blit(instructions2, instructions2_rect)
 
-        instructions3 = font.render(" TIPS : Green crystals for health, BEWARE! lots of gems = lots of enemies ", True,
+        instructions3 = font.render(" TIPS : Green crystals for health, BEWARE! Avoid the Bats! ", True,
                                     (255, 255, 255))
         instructions3_rect = instructions3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 150))
         screen.blit(instructions3, instructions3_rect)
@@ -52,7 +51,6 @@ def intro_screen(screen):
         pygame.display.update()
 
  # ================================== GAME OVER SCREEN ====================================== #
-
 
 def game_over_screen(screen, player):
     font = pygame.font.Font(None, 50)
@@ -63,7 +61,7 @@ def game_over_screen(screen, player):
     score_text = font.render(f"You collected: {player.points} pounds of treasure", True, (255, 255, 255))
     score_rect = score_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
 
-# ------ The actual game over background ------- #
+# ------ Background Backdrop ------- #
 
     # Fill screen with a black background
     screen.fill((0, 0, 0))

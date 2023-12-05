@@ -168,20 +168,23 @@ while running:
         #Enemy has a knockback effect:
         enemy.rect.x += 30  # Move the enemy in the x positive direction (add 30)
 
-       '''# Condition to spawn an enemy every 10 points
-        if player.points % 10 == 0 and spawn_enemy:  # Spawning an enemy every 20 points
+# ---------- add enemies based on collision ------------ #
+
+        if player.points % 10 == 0 and spawn_enemy:  # Spawning an enemy every collision
 
             new_enemy = Enemy()  # Create a new enemy instance
+
             # Set the initial position of the new enemy to random coordinates
             new_enemy.rect.x = random.randint(0, screen_width - new_enemy.rect.width)
             new_enemy.rect.y = random.randint(0, screen_height - new_enemy.rect.height)
 
             new_enemy = Enemy()
+
             # Add the new enemy to the enemy group
             enemy_group.add(new_enemy)
-            # Set the flag to False to prevent spawning multiple enemies at once
-            can_spawn_enemy = False
-            spawn_enemy = True'''
+
+            # Prevents spawning multiple enemies at once
+            spawn_enemy = True
 
     # Check if player's health reaches zero or less
     if player.health <= 0:
@@ -195,8 +198,6 @@ while running:
 
     # Flip screen so user can see it
     pygame.display.flip()
-
-
 
 # Quit pygame
 pygame.quit()
