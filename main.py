@@ -83,8 +83,9 @@ enemy_group.add(enemy1)
 spawn_enemy = True
 
 # ===== END OF CREATION ====== #
-high_score = 0
-# Main Game loop
+
+
+# ================================= MAIN GAME LOOP ================================= #
 print('Running game...')
 running = True
 while running:
@@ -94,6 +95,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    clock.tick(60)  # Runs the loop for 60 frames per second
+
     # ====== Draw Background ============= #
     screen.blit(background, (0, 0))
     screen.blit(tiles, (0, 0))
@@ -101,7 +104,7 @@ while running:
     screen.blit(hills, (0, 0))
     screen.blit(hills2, (640, 0))
 
-    # Draw Platforms
+    # ---------------- Draw Platforms- --------------- #
     platform_group.draw(screen)
 
     # ====== Drawing Entities ============= #
@@ -136,19 +139,18 @@ while running:
         new_jewel = Jewel()
         jewel_group.add(new_jewel)
         new_jewel.set_random_position(screen_width, screen_height, platform_group)
-
-
+        # show the points onto the screen
         player.draw_points(screen)
     # =================== Interactions between objects/Enemy and player ============================ #
 
     #--------- Health objects ----------- #
-    collided_health_items = pygame.sprite.spritecollide(player, HealthItem_group, True)
-    for health_item in collided_health_items:
-        health_item.interact(player)
+    collided_health_items = pygame.sprite.spritecollide(player, HealthItem_group, True) # Detecting collisions between player and health object
+    for health_item in collided_health_items: # For each health item the player collides with
+        health_item.interact(player) # interact between the health item and the player
 
-        new_health_item = HealthItem()
-        new_health_item.set_random_position(screen_width, screen_height, platform_group)
-        HealthItem_group.add(new_health_item)
+        new_health_item = HealthItem() # Create a new health item
+        new_health_item.set_random_position(screen_width, screen_height, platform_group)  # New health item randomly on the screen
+        HealthItem_group.add(new_health_item)  # Add the new health item to the group of health items
 
 # ---- Drawing on screen --- #
     jewel_group.draw(screen)
@@ -166,12 +168,14 @@ while running:
         enemy.rect.x += 30  # Move the enemy back upon
 
        # Condition to spawn an enemy every 10 points
-        if player.points % 20 == 0 and spawn_enemy:  # Spawning an enemy every 20 points
-            can_spawn_enemy = True
+        if player.points % 10 == 0 and spawn_enemy:  # Spawning an enemy every 20 points
+
+            #can_spawn_enemy = True
             new_enemy = Enemy()  # Create a new enemy instance
             # Set the initial position of the new enemy to random coordinates
             new_enemy.rect.x = random.randint(0, screen_width - new_enemy.rect.width)
             new_enemy.rect.y = random.randint(0, screen_height - new_enemy.rect.height)
+
             new_enemy = Enemy()
             # Add the new enemy to the enemy group
             enemy_group.add(new_enemy)
@@ -184,14 +188,18 @@ while running:
         game_over_screen(screen, player)  # Display the game over screen
         running = False  # Exit the game loop
 
-    # ====================================== DONE =============================================== #
+        # Flip screen so user can see it
+        pygame.display.flip()
+
+        # ====================================== DONE =============================================== #
 
     # Flip screen so user can see it
     pygame.display.flip()
 
-    # Slow loop to 60 frames per second
-    clock.tick(60)
+
 
 # Quit pygame
 pygame.quit()
 sys.exit()
+
+

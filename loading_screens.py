@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+
 def intro_screen(screen):
     intro = True
     while intro:
@@ -51,26 +52,26 @@ def intro_screen(screen):
         pygame.display.update()
 
  # ================================== GAME OVER SCREEN ====================================== #
+
+
 def game_over_screen(screen, player):
     font = pygame.font.Font(None, 50)
-    game_over_text = font.render("Game Over", True, (255, 0, 0))  # Red text
-    text_rect = game_over_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 ))
+    game_over_text = font.render("Game Over, You Died!", True, (255, 0, 0))  # Red text
+    text_rect = game_over_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
 
-    def draw_points(self, screen):
-        font = pygame.font.Font(None, 36)
-        points_text = font.render(f'Points: {self.points}', True, (255, 255, 255))
-        text_position = (10, 10)  # Top-left corner
+    # Display player's final score or relevant game-over information
+    score_text = font.render(f"You collected: {player.points} pounds of treasure", True, (255, 255, 255))
+    score_rect = score_text.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
 
+# ------ The actual game over background ------- #
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+    # Fill screen with a black background
+    screen.fill((0, 0, 0))
 
-        screen.fill((0, 0, 0))  # Black background
+    # Showing the text from functions onto the screen
+    screen.blit(game_over_text, text_rect)
+    screen.blit(score_text, score_rect)
 
-        screen.blit(game_over_text, text_rect)
-        screen.blit(points_text, text_position)
+    pygame.display.update()
+    pygame.time.delay(3000) # Keeps the background screen to continue running
 
-        pygame.display.update()
